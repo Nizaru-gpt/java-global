@@ -142,7 +142,7 @@ Repository ini digunakan untuk keperluan internal perusahaan.
 ------------------------------------------------------------
 Developer
 ------------------------------------------------------------
-Author: Nizar (Aksa)  
+Author: Nizar
 Repository: https://github.com/Nizaru-gpt/java-global.git  
 Framework: React + TypeScript + Vite  
 Versi: 1.0.0
