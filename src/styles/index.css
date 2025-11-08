@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========= Global ========= */
+html { scroll-behavior: smooth; }
+body { @apply font-sans text-[#222]; }
+h1,h2,h3,h4 { @apply font-semibold tracking-tight; }
+
+/* Container lebar desktop */
+.container-xl { @apply max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8; }
+
+/* Garis oranye tipis di bawah heading section (posisi center) */
+.heading-underline::after {
+  content: '';
+  @apply block w-[64px] h-[3px] mt-3 mx-auto;
+  background-color: #f59e0b; /* brand orange */
+}
+/* Varian garis kiri */
+.heading-underline-left::after {
+  content: '';
+  @apply block w-[64px] h-[3px] mt-3;
+  background-color: #f59e0b;
+}
+
+/* Overlay gelap untuk hero */
+.hero-overlay::before {
+  content: '';
+  @apply absolute inset-0;
+  background: rgba(0,0,0,.55);
+}
+
+/* Efek kartu kaca (services) */
+.glass { @apply bg-black/40 backdrop-blur-sm border border-white/10 rounded-md; }
+
+/* ========= COMPONENTS ========= */
+@layer components {
+  /* Section layout */
+  .section { @apply py-16 md:py-20; }
+  .section-title { @apply text-[32px] md:text-[34px] font-semibold text-center; }
+  .section-sub { @apply text-center opacity-80 mt-2; }
+
+  /* Nav link: putih → oranye saat hover/fokus */
+  .nav-link { @apply text-white/90 transition-colors tracking-wide; }
+  .nav-link:hover, .nav-link:focus { color: #f59e0b; }
+
+  /* Tombol outline oranye */
+  .btn-outline-orange {
+    @apply inline-flex items-center justify-center px-6 h-[46px] rounded-[4px]
+           border text-[15px] font-medium transition-colors duration-200;
+    border-color: #f59e0b; color: #f59e0b;
+  }
+  .btn-outline-orange:hover { background-color: #f59e0b; color: #fff; }
+  .btn-outline-orange:focus-visible { @apply outline-none ring-2; box-shadow: 0 0 0 3px rgba(245,158,11,.35); }
+
+  /* Tombol chevron abu (untuk accordion bar) */
+  .btn-chevron {
+    @apply inline-flex items-center gap-2 px-4 h-[40px] rounded-[4px]
+           border border-gray-300 text-[14px] text-gray-700 transition-colors duration-200;
+  }
+  .btn-chevron:hover { @apply bg-gray-100; }
+  .btn-chevron:focus-visible { @apply ring-2 ring-gray-300/60 outline-none; }
+
+  /* Tombol outline abu varian umum */
+  .btn-outline-gray {
+    @apply inline-flex items-center gap-2 px-4 h-[40px] rounded-[4px]
+           border border-gray-300 text-[14px] text-gray-700 transition-colors duration-200;
+  }
+  .btn-outline-gray:hover { @apply bg-gray-100; }
+  .btn-outline-gray:focus-visible { @apply ring-2 ring-gray-300/60 outline-none; }
+
+  /* Tombol accordion abu — hover oranye */
+  .btn-accordion {
+    @apply w-full md:max-w-[640px] h-[54px] px-4 rounded-[2px] bg-gray-100 text-[#2b2b2b]
+           inline-flex items-center gap-3 justify-start transition-all duration-200 ease-in-out;
+  }
+  .btn-accordion:hover { color: #fff; background-color: #f59e0b; }
+  .btn-accordion .chev { @apply text-[18px] transition-transform duration-200; }
+  .btn-accordion.is-open .chev { transform: rotate(90deg); }
+  .btn-accordion.open { color: #fff; background-color: #f59e0b; }
+
+  /* Panel konten di bawah tombol accordion */
+  .accordion-panel {
+    @apply p-6 text-[16px] leading-[1.9] text-[#2b2b2b]
+           bg-white border border-gray-200 rounded-[4px] shadow-sm;
+  }
+
+  /* Panel fixed height (opsional) untuk mencegah dorong layout */
+  .fixed-panel { @apply h-[190px] md:h-[210px]; }
+
+  /* Kartu general (dipakai di Clients) */
+  .shadow-card { @apply shadow-[0_8px_24px_rgba(0,0,0,0.06)]; }
+}
+
+/* ===== Swiper bullets: Clients ===== */
+.swiper-pagination-bullets {
+  margin-top: 14px;
+  position: static; /* biar tetap di dalam kartu */
+}
+.swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  background: #cbd5e1; /* abu-abu */
+  opacity: 1;
+  margin: 0 5px !important;
+}
+.swiper-pagination-bullet-active {
+  background: #f59e0b; /* oranye aktif */
+}
+
+/* ===== Patch kecil untuk header fixed anti “garis putih” saat scroll =====
+   Tambahkan class "fix-antialias" di tag <header> kalau masih terlihat gap tipis. */
+.fix-antialias {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
