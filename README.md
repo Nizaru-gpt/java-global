@@ -1,73 +1,150 @@
-# React + TypeScript + Vite
+# Java Global — Company Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website resmi **Java Global** yang dibangun menggunakan **React + TypeScript (Vite)**.  
+Proyek ini menampilkan profil perusahaan, layanan, portofolio proyek, tim, klien, dan katalog produk secara profesional dan interaktif.
 
-Currently, two official plugins are available:
+------------------------------------------------------------
+Tech Stack
+------------------------------------------------------------
+Frontend: React 18 + TypeScript  
+Bundler: Vite  
+Styling: Tailwind CSS (atau utilitas CSS sejenis)  
+Routing: React Router DOM  
+Image & Video Assets: dioptimasi melalui import.meta.glob  
+Deployment-ready: mendukung hosting statis (Vercel, Netlify, Cloudflare, dll.)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+------------------------------------------------------------
+Struktur Proyek
+------------------------------------------------------------
+src/
+ ├── assets/
+ │    └── images/
+ │         ├── product/
+ │         └── projects/        # robot-1.jpg, robot-2.jpg, dst.
+ ├── components/
+ │    └── product/
+ │         ├── Sidebar/
+ │         │    ├── SearchBox.tsx
+ │         │    ├── RecentPosts.tsx
+ │         │    ├── Archives.tsx
+ │         │    └── Categories.tsx
+ │         ├── ProductDetailHero.tsx
+ │         └── ProductNavPager.tsx
+ ├── data/
+ │    ├── products.ts           # daftar produk (title, slug, image)
+ │    └── productDetails.ts     # detail produk (gambar, video, link berita)
+ ├── pages/
+ │    ├── Home.tsx
+ │    ├── About.tsx
+ │    ├── Product.tsx
+ │    ├── ProductDetail.tsx
+ │    ├── Download.tsx
+ │    └── Contact.tsx
+ ├── router/
+ │    └── index.tsx             # routing utama + scroll-to-top
+ ├── main.tsx
+ └── index.css
 
-## React Compiler
+------------------------------------------------------------
+Fitur Utama
+------------------------------------------------------------
+Home Page
+- Hero Section dengan headline perusahaan
+- Mission & Vision
+- Our Service (daftar layanan)
+- Our Project (galeri proyek dengan gambar berurutan robot-1.jpg, robot-2.jpg, dst.)
+- Team & Client
+- Footer dengan kontak dan informasi dasar
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+About Page
+- Menjelaskan pengalaman & keunggulan perusahaan (Our Experience)
 
-## Expanding the ESLint configuration
+Product Page
+- Menampilkan daftar produk dari src/data/products.ts
+- Klik salah satu produk untuk melihat detailnya
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Product Detail Page
+- Detail produk lengkap (deskripsi, gambar, video, tanggal, penulis)
+- Media (gambar/video) dapat diperbesar
+- Sidebar: Search, Recent Posts, Categories, Archives
+- Navigasi antar produk (ProductNavPager)
+- Tautan resmi ke artikel produk (misalnya dari haiwell.com)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Download Page
+- Menyediakan file atau dokumen unduhan (komponen DownloadHero)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Contact Page
+- Lokasi perusahaan menggunakan Google Maps Embed (tanpa API Key)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+------------------------------------------------------------
+Cara Menjalankan Proyek
+------------------------------------------------------------
+1. Clone Repository (SSH)
+   git clone git@github.com:Nizaru-gpt/java-global.git
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+   Atau jika belum setup SSH:
+   git clone https://github.com/Nizaru-gpt/java-global.git
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   Masuk ke folder proyek:
+   cd java-global
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. Install Dependencies
+   Pastikan sudah terpasang Node.js versi 18+ dan npm
+   npm install
+
+3. Jalankan Server Development
+   npm run dev
+
+   Vite akan menjalankan server lokal:
+   http://localhost:5173
+
+4. Build untuk Produksi
+   npm run build
+
+   Hasil build akan muncul di folder dist/
+
+5. Preview Build (opsional)
+   npm run preview
+
+------------------------------------------------------------
+Deployment
+------------------------------------------------------------
+1. Jalankan perintah build untuk menghasilkan folder dist/
+   npm run build
+
+2. Upload folder dist/ ke platform hosting statis:
+   - Vercel
+   - Netlify
+   - Cloudflare Pages
+   - atau server pribadi (Nginx/Apache)
+
+3. Pastikan server mengarahkan semua route ke index.html
+   agar routing React (SPA) dapat berfungsi dengan benar.
+
+------------------------------------------------------------
+File Penting
+------------------------------------------------------------
+src/data/products.ts        - Daftar produk  
+src/data/productDetails.ts  - Detail lengkap tiap produk  
+src/assets/images/product/  - Gambar produk  
+src/assets/images/projects/ - Galeri proyek  
+src/pages/Contact.tsx       - Peta lokasi (Google Maps Embed)  
+.gitignore                  - File dan folder yang diabaikan Git  
+README.md                   - Dokumentasi proyek ini
+
+------------------------------------------------------------
+Lisensi
+------------------------------------------------------------
+Hak cipta © Java Global.  
+Seluruh hak dilindungi undang-undang.  
+Repository ini digunakan untuk keperluan internal perusahaan.
+
+------------------------------------------------------------
+Developer
+------------------------------------------------------------
+Author: Nizar (Aksa)  
+Repository: https://github.com/Nizaru-gpt/java-global.git  
+Framework: React + TypeScript + Vite  
+Versi: 1.0.0
+
+"Clean code, clean company image."
